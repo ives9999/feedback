@@ -23,7 +23,10 @@ export const FeedbackProvider = ({children}) => {
     ])
 
     const [feedbackEdit, setFeedbackEdit] = useState({
-        item: {},
+        item: {
+            text: 'Please rating it.',
+            rating: 10,
+        },
         canEdit: false,
     })
 
@@ -41,6 +44,13 @@ export const FeedbackProvider = ({children}) => {
         })
     }
 
+    // Update feedback
+    const updateFeedback = (id, updItem) => {
+        setFeedback(
+            feedback.map( (item) => (item.id === id ? {...item, ...updItem} : item))
+        )
+    }
+
     // Delete feedback
     const deleteFeedback = (id) => {
         if (window.confirm('Are you sure you want to delete?')) {
@@ -52,6 +62,7 @@ export const FeedbackProvider = ({children}) => {
         feedback,
         addFeedback,
         editFeedback,
+        updateFeedback,
         deleteFeedback,
         feedbackEdit,
     }}>
